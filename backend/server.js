@@ -22,6 +22,7 @@ import { users, posts } from "./data/index.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -45,6 +46,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
@@ -52,6 +54,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 /* ROUTES */
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+
 app.use("/posts", postRoutes);
 dotenv.config({path:"backend/.env"})
 
