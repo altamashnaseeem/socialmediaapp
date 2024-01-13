@@ -56,6 +56,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
 app.use("/posts", postRoutes);
+
 dotenv.config({path:"backend/.env"})
 
 /* MONGOOSE SETUP */
