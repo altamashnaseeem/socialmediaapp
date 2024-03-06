@@ -4,6 +4,7 @@ import User from "../models/User.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
+  
   try {
     const {
       firstName,
@@ -15,6 +16,7 @@ export const register = async (req, res) => {
       location,
       occupation,
     } = req.body;
+    
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -34,9 +36,18 @@ export const register = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
+    console.log("error ocfure")
     res.status(500).json({ error: err.message });
   }
 };
+
+export const demo=async(req,res)=>{
+  try {
+        res.status(200).json({message:"CHECKKKKKK"})
+  } catch (error) {
+     res.status(500).json({message:"oh sorrty"})
+  }
+}
 
 /* LOGGING IN */
 export const login = async (req, res) => {

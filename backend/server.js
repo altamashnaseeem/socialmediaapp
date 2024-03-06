@@ -6,12 +6,13 @@ import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
+import axios from "axios"
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
-import { register } from "./controllers/auth.js";
+import { demo, register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
@@ -48,6 +49,18 @@ const upload = multer({ storage });
 
 
 /* ROUTES WITH FILES */
+app.get("/demo",demo)
+app.get('/api/news', async (req, res) => {
+  try {
+      const {data} = await axios.get(`
+      https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=3ee5a7461729484694efd144699b0922`);
+     return res.status(200).json(data)
+
+  } catch (error) {
+      console.error('Failed to fetch news:', error);
+      res.status(500).json({ message: 'Failed to fetch news' });
+  }
+});
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 

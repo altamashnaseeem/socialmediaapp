@@ -14,12 +14,12 @@ const AdvertWidget = () => {
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
   const [startupNews, setStartupNews] = useState([]);
-  console.log("startup::",startupNews)
+  //console.log("startup::",startupNews)
   useEffect(()=>{
 
   const fetchStartupNews = async () => {
     try {
-      const {data} = await axios.get("https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=3ee5a7461729484694efd144699b0922")
+      const {data} = await axios.get(`http://localhost:3001/api/news`)
        
       
       
