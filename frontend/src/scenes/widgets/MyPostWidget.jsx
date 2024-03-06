@@ -156,7 +156,7 @@ import { BASE_URL } from "helper";
           )}
   
           <Button
-            disabled={!post}
+            // disabled={!post}
             onClick={handlePost}
             sx={{
               color: palette.background.alt,

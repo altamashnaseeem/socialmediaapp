@@ -15,6 +15,9 @@ export const colorTokens = {
     900: "#0A0A0A",
     1000: "#000000",
   },
+  black:{
+    0:"#020202"
+  },
   primary: {
     50: "#E6FBFF",
     100: "#CCF7FE",
@@ -53,6 +56,9 @@ export const themeSettings = (mode) => {
               default: colorTokens.grey[900],
               alt: colorTokens.grey[800],
             },
+            bg:{
+              dark:colorTokens.black[0]
+            }
           }
         : {
             // palette values for light mode
