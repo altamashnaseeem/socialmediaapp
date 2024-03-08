@@ -21,7 +21,7 @@ const AdvertWidget = () => {
 
   const fetchStartup = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:3001/api/new`)
+      const {data} = await axios.get(`${BASE_URL}/api/new`)
        
       
       

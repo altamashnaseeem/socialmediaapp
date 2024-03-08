@@ -1,1 +1,1 @@
-export const BASE_URL="https://mernback-ytxs.onrender.com"
+export const BASE_URL="https://mernback-ygj6.onrender.com"
