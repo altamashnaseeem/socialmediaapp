@@ -8,28 +8,30 @@ import { BASE_URL } from "helper";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AdvertWidget = () => {
+  
    const navigate=useNavigate()
   const { palette } = useTheme();
   const dark = palette.neutral.dark;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
-  const [startupNews, setStartupNews] = useState([]);
-  //console.log("startup::",startupNews)
+  const [startupNew, setStartupNew] = useState([]);
+  console.log("startup::",startupNew)
+ 
   useEffect(()=>{
 
-  const fetchStartupNews = async () => {
+  const fetchStartup = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:3001/api/news`)
+      const {data} = await axios.get(`http://localhost:3001/api/new`)
        
       
       
-      setStartupNews(data.articles); // Assuming 'articles' is the array of news articles in the response
+      setStartupNew(data); // Assuming 'articles' is the array of news articles in the response
     } catch (error) {
       console.error('Error fetching startup news:', error);
     }
   };
 
-  fetchStartupNews();
+  fetchStartup();
   },[])
 
   return (
@@ -37,18 +39,22 @@ const AdvertWidget = () => {
     top: 0,}}>
       <FlexBetween>
         <Typography color={dark} variant="h5" fontWeight="500" sx={{paddingBottom:"1rem"}}>
-        Top 10 Headlines with Startups
+         Startup launching Products 
         </Typography>
         <Typography color={medium}></Typography>
       </FlexBetween>
     <Box sx={{overflow:"scroll",height:"30rem",overflowX: 'hidden'}} >
-       {startupNews?.map((item)=>
+       {/* {startupNew?.map((item)=>
           
           <List sx={{ listStyleType: 'disc' }}>
-         <ListItem sx={{ display: 'list-item' }}  >
+         <ListItem sx={{ display: 'list-item',marginTop:"1rem" }}  >
               
-                <Link href={item.url} variant="h4" underline="none" target="_blank" >
-                {item.title}
+                <Link href={item.imageUrl} variant="h5" underline="none" target="_blank" >
+                <Typography variant="h4">
+                  {item.title}
+                </Typography>
+                <Typography variant="h5" sx={{paddingTop:"0.5rem"}}>{item.description}</Typography>
+                
                 </Link>
               
                
@@ -57,7 +63,23 @@ const AdvertWidget = () => {
        </List>
           
        
-       )}
+       )} */}
+        <List>
+          {startupNew.map((item, index) => (
+            <ListItem key={index} sx={{ display: 'list-item' ,marginTop:"1rem"}}>
+              {/* Prepend the index + 1 to act as the item number. Adjust styling as needed. */}
+              <Typography variant="body1" component="span" sx={{ marginRight: "8px" }}>
+                {index + 1}.
+              </Typography>
+              <Link href={item.imageUrl}  underline="none" target="_blank">
+              <Typography variant="h4">
+                  {item.title}
+                </Typography>
+                <Typography variant="h5" sx={{paddingTop:"0.5rem"}}>{item.description}</Typography>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
     </Box>
          
      

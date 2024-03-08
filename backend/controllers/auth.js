@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-
+import StartupNews from "../models/GetInfo.js";
 /* REGISTER USER */
 export const register = async (req, res) => {
   
@@ -49,6 +49,22 @@ export const demo=async(req,res)=>{
   }
 }
 
+export const startup=async (req, res) => {
+ 
+  try {
+      
+     const getInfo=await StartupNews.find()
+     
+     
+     return res.status(200).json(getInfo)
+
+
+  } catch (error) {
+    return res.status(500).json({message:error.message})
+      // console.error('Failed to fetch news:', error);
+      // res.status(500).json({ message: 'Failed to fetch news' });
+  }
+}
 /* LOGGING IN */
 export const login = async (req, res) => {
   try {
